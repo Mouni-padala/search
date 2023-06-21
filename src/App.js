@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import React,{useState} from 'react'
 import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import Search from './Search';
+const App=()=>{
+  const [search,setSearch]=useState('');
+  const [show,setShow]=useState(false);
+  const submitHandler=(e)=>{
+    e.preventDefault();
+    console.log(search)
+    setShow(true);
+  }
+  return(
+    <div className="main-page">
+      <center>
+      <h1>Search For Vehicles</h1>
+      <form onSubmit={submitHandler}>
+        <input type="text" value={search} placeholder="search here..." onChange={(e)=>{setSearch(e.target.value)
+}}/><br/><br/>
+        <input  className="submit" type="submit"/>
+      </form>
+      </center>
+      { show && <Search search={search} />}
     </div>
-  );
+  )
 }
-
 export default App;
